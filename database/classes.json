@@ -1,0 +1,14 @@
+{
+  "CSE-A": {
+    "teacher": "Prof. Alan Turing",
+    "subject": "Artificial Intelligence",
+    "students": [],
+    "created_at": "2026-11-22T19:47:20.347321"
+  },
+  "CSE-B": {
+    "teacher": "Prof. Alan Turing",
+    "subject": "Data Structures",
+    "students": [],
+    "created_at": "2026-11-22T19:47:20.356806"
+  }
+}

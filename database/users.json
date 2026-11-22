@@ -1,0 +1,20 @@
+{
+  "students": {
+    "CS2024001": {
+      "password": "password123",
+      "name": "Ada Lovelace",
+      "created_at": "2026-11-22T19:47:20.346520",
+      "class_name": "CSE-A",
+      "email": "ada@example.com"
+    }
+  },
+  "teachers": {
+    "teacher_demo": {
+      "password": "password123",
+      "name": "Prof. Alan Turing",
+      "created_at": "2026-11-22T19:47:20.332556",
+      "department": "Computer Science & Engineering",
+      "subject": "Artificial Intelligence"
+    }
+  }
+}

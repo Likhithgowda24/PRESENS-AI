@@ -1,0 +1,3 @@
+date,time,student_id,student_name,class_name,subject,status,confidence,method
+2026-11-21,09:30:15,CS2024001,Ada Lovelace,CSE-A,Artificial Intelligence,Present,95.4,face_recognition
+2026-11-20,09:28:40,CS2024001,Ada Lovelace,CSE-A,Data Structures,Present,92.1,face_recognition

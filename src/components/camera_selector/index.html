@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRESENS AI Camera Selector</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: transparent;
+            padding: 6px;
+            color: #1e1b4b;
+        }
+
+        .camera-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 540px;
+        }
+
+        .select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid #6366f1;
+            background: #f8fafc;
+            color: #1e1b4b;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        select:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            background: #0f172a;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1); /* Selfie Mirror */
+        }
+
+        .overlay-flash {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.6; }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="camera-container" id="container">
+    <div class="select-group">
+        <label for="cameraSelect">📹 Select Preferred Camera Source:</label>
+        <select id="cameraSelect">
+            <option value="" disabled selected>Searching for connected cameras...</option>
+        </select>
+    </div>
+
+    <div class="video-wrapper">
+        <div class="status-badge" id="cameraStatus">
+            <div class="status-dot"></div>
+            <span id="activeCamLabel">Live Camera</span>
+        </div>
+        <video id="videoElement" autoplay playsinline></video>
+        <div class="overlay-flash" id="flashOverlay"></div>
+    </div>
+
+    <div class="error-message" id="errorMsg"></div>
+
+    <div class="btn-group">
+        <button class="btn btn-primary" id="snapBtn">📸 Capture Snapshot for FaceID</button>
+        <button class="btn btn-secondary" id="retakeBtn" style="display: none;">🔄 Retake</button>
+    </div>
+</div>
+
+<script>
+    let currentStream = null;
+    const video = document.getElementById('videoElement');
+    const cameraSelect = document.getElementById('cameraSelect');
+    const snapBtn = document.getElementById('snapBtn');
+    const retakeBtn = document.getElementById('retakeBtn');
+    const activeCamLabel = document.getElementById('activeCamLabel');
+    const errorMsg = document.getElementById('errorMsg');
+    const flashOverlay = document.getElementById('flashOverlay');
+
+    // Notify Streamlit of iframe height
+    function updateHeight() {
+        const height = document.getElementById('container').offsetHeight + 30;
+        window.parent.postMessage({
+            isStreamlitMessage: true,
+            type: "streamlit:setFrameHeight",
+            height: height
+        }, "*");
+    }
+
+    // Send captured base64 data to Streamlit Python
+    function sendValueToStreamlit(val) {
+        window.parent.postMessage({
+            isStreamlitMessage: true,
+            type: "streamlit:setComponentValue",
+            value: val
+        }, "*");
+    }
+
+    // Initialize Streamlit component handshake
+    function onStreamlitReady() {
+        window.parent.postMessage({
+            isStreamlitMessage: true,
+            type: "streamlit:componentReady",
+            apiVersion: 1
+        }, "*");
+        updateHeight();
+    }
+
+    // Stop existing camera tracks
+    function stopCurrentStream() {
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+            currentStream = null;
+        }
+    }
+
+    // Start video from specified device ID
+    async function startCamera(deviceId = null) {
+        stopCurrentStream();
+        errorMsg.style.display = 'none';
+
+        const constraints = {
+            video: deviceId ? { deviceId: { exact: deviceId } } : { facingMode: "user" },
+            audio: false
+        };
+
+        try {
+            currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+            video.srcObject = currentStream;
+            video.play();
+            updateHeight();
+        } catch (err) {
+            console.error("Camera access error:", err);
+            errorMsg.innerText = "Camera error: " + (err.message || "Could not start video stream");
+            errorMsg.style.display = 'block';
+            updateHeight();
+        }
+    }
+
+    // Enumerate all available camera videoinput devices
+    async function loadCameras() {
+        try {
+            // Initial call to get permission and labels
+            await startCamera();
+
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const videoDevices = devices.filter(d => d.kind === 'videoinput');
+
+            cameraSelect.innerHTML = '';
+
+            if (videoDevices.length === 0) {
+                cameraSelect.innerHTML = '<option value="">No cameras detected</option>';
+                return;
+            }
+
+            let systemCamIndex = 0;
+            videoDevices.forEach((device, index) => {
+                const opt = document.createElement('option');
+                opt.value = device.deviceId;
+                let label = device.label || `Camera ${index + 1}`;
+
+                // Highlight built-in / integrated system cameras
+                if (label.toLowerCase().includes('integrated') || label.toLowerCase().includes('built-in') || label.toLowerCase().includes('system') || label.toLowerCase().includes('hd')) {
+                    opt.innerText = `⭐ ${label} (System Camera)`;
+                    systemCamIndex = index;
+                } else if (label.toLowerCase().includes('iriun')) {
+                    opt.innerText = `📱 ${label} (Virtual)`;
+                } else {
+                    opt.innerText = `📹 ${label}`;
+                }
+
+                cameraSelect.appendChild(opt);
+            });
+
+            // Default to system camera if detected
+            cameraSelect.selectedIndex = systemCamIndex;
+            activeCamLabel.innerText = cameraSelect.options[cameraSelect.selectedIndex].text.replace(/^[⭐📱📹]\s*/, '');
+
+            // Switch to selected system camera
+            if (videoDevices[systemCamIndex]) {
+                await startCamera(videoDevices[systemCamIndex].deviceId);
+            }
+
+            updateHeight();
+        } catch (err) {
+            console.error("Enumeration error:", err);
+        }
+    }
+
+    // On user camera selection change
+    cameraSelect.addEventListener('change', async (e) => {
+        const deviceId = e.target.value;
+        activeCamLabel.innerText = cameraSelect.options[cameraSelect.selectedIndex].text.replace(/^[⭐📱📹]\s*/, '');
+        await startCamera(deviceId);
+    });
+
+    // Capture photo from video frame
+    snapBtn.addEventListener('click', () => {
+        if (!video.videoWidth) return;
+
+        // Visual flash effect
+        flashOverlay.style.opacity = '0.8';
+        setTimeout(() => { flashOverlay.style.opacity = '0'; }, 200);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+
+        // Mirror back horizontally to save proper orientation
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const base64Data = canvas.toDataURL('image/jpeg', 0.95);
+        sendValueToStreamlit(base64Data);
+
+        // Update UI buttons
+        snapBtn.innerText = "✅ Snapshot Captured!";
+        retakeBtn.style.display = 'inline-flex';
+        updateHeight();
+    });
+
+    // Retake button
+    retakeBtn.addEventListener('click', () => {
+        snapBtn.innerText = "📸 Capture Snapshot for FaceID";
+        retakeBtn.style.display = 'none';
+        sendValueToStreamlit(null);
+        updateHeight();
+    });
+
+    // Initialize
+    window.addEventListener('load', () => {
+        loadCameras();
+        onStreamlitReady();
+    });
+</script>
+
+</body>
+</html>
