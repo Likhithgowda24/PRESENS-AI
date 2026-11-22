@@ -36,12 +36,10 @@ def find_screenshot(candidates):
     return ""
 
 
-HOME_IMG     = find_screenshot([SCREENSHOTS_DIR / "fig0_home_landing.png"])
-STUDENT_IMG  = find_screenshot([SCREENSHOTS_DIR / "fig_student_clean.png",
-                                 SCREENSHOTS_DIR / "fig2_student_portal_cam.png"])
-TEACHER_LOGIN_IMG = find_screenshot([SCREENSHOTS_DIR / "fig3_teacher_login.png"])
-TEACHER_DASH_IMG  = find_screenshot([SCREENSHOTS_DIR / "fig_teacher_upload.png",
-                                      SCREENSHOTS_DIR / "fig4_teacher_dashboard_cam.png"])
+HOME_IMG          = find_screenshot([SCREENSHOTS_DIR / "fig_home.png", SCREENSHOTS_DIR / "fig0_home_landing.png"])
+STUDENT_IMG       = find_screenshot([SCREENSHOTS_DIR / "fig_student_login.png"])
+TEACHER_LOGIN_IMG = find_screenshot([SCREENSHOTS_DIR / "fig_teacher_login.png", SCREENSHOTS_DIR / "fig3_teacher_login.png"])
+TEACHER_DASH_IMG  = find_screenshot([SCREENSHOTS_DIR / "fig_teacher_upload.png"])
 TEACHER_SUBJ_IMG  = find_screenshot([SCREENSHOTS_DIR / "fig_teacher_subjects.png"])
 TEACHER_REC_IMG   = find_screenshot([SCREENSHOTS_DIR / "fig_teacher_records.png"])
 ORIG_SITE_IMG     = find_screenshot([SCREENSHOTS_DIR / "fig1_original_site.png"])
