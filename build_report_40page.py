@@ -1,10 +1,10 @@
 """
-PRESENS AI - 40-Page Academic Project Report Builder (Refined & Perfected)
-- No footers on any page (removed per user request)
-- Clean, properly aligned Table of Contents with dot leaders
-- Symmetrical centering and proper vertical fit on all pages (no cutoffs)
-- Page 10 and all other dense pages optimized to prevent text cutoff
-- Clean UI screenshots (no webcam or human faces)
+PRESENS AI - 40-Page Academic Project Report Builder (Full Page Fill & Enhanced Typography)
+- Font size increased above 10pt (10.8pt body, 14.5pt h2, 12pt h3, line-height 1.68)
+- Every page densely and elegantly filled with content so no page looks empty
+- Larger UI screenshots (116mm height) with in-depth technical explanations
+- Fully aligned Table of Contents with clear dot leaders filling Page 5
+- Strictly 40 pages, perfectly centered, no footers, zero page cutoffs
 Author: Likhith Gowda M A
 """
 import os, sys, base64, subprocess, shutil, re
@@ -40,12 +40,12 @@ TEACHER_SUBJ_IMG  = find_screenshot([SCREENSHOTS_DIR / "fig_teacher_subjects.png
 TEACHER_REC_IMG   = find_screenshot([SCREENSHOTS_DIR / "fig_teacher_records.png"])
 ORIG_SITE_IMG     = find_screenshot([SCREENSHOTS_DIR / "fig1_original_site.png"])
 
-def img_tag(b64, caption="", max_h="110mm"):
+def img_tag(b64, caption="", max_h="116mm"):
     if not b64:
         return f'<div class="img-placeholder">📷 {caption}</div>'
-    return f'''<figure style="margin: 8px auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
-      <img src="{b64}" style="max-width: 96%; max-height: {max_h}; object-fit: contain; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin: 0 auto; display: block;" />
-      <figcaption style="font-size: 8.5pt; color: #64748b; font-style: italic; margin-top: 5px; text-align: center;">{caption}</figcaption>
+    return f'''<figure style="margin: 10px auto; text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%;">
+      <img src="{b64}" style="max-width: 98%; max-height: {max_h}; object-fit: contain; border-radius: 8px; border: 1.5px solid #cbd5e1; box-shadow: 0 4px 14px rgba(0,0,0,0.09); margin: 0 auto; display: block;" />
+      <figcaption style="font-size: 9pt; color: #64748b; font-style: italic; margin-top: 6px; text-align: center;">{caption}</figcaption>
     </figure>'''
 
 CSS = """
@@ -59,10 +59,10 @@ CSS = """
 
 body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 9.5pt;
-    line-height: 1.55;
+    font-size: 10.8pt;
+    line-height: 1.68;
     color: #1e293b;
-    background: #e2e8f0;
+    background: #cbd5e1;
     margin: 0;
     padding: 0;
 }
@@ -80,7 +80,7 @@ body {
     break-after: page;
     position: relative;
     background: #ffffff;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
     display: flex;
     flex-direction: column;
 }
@@ -112,17 +112,17 @@ body {
     }
 }
 
-/* HEADINGS & TYPOGRAPHY */
-h1 { font-size: 20pt; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-h2 { font-size: 13pt; font-weight: 700; color: #1e3a8a; border-bottom: 2px solid #3b82f6; padding-bottom: 4px; margin: 10px 0 6px; }
-h3 { font-size: 10.5pt; font-weight: 600; color: #1e40af; margin: 8px 0 4px; }
-h4 { font-size: 9.5pt; font-weight: 600; color: #2563eb; margin: 6px 0 3px; }
-p  { margin: 4px 0; text-align: justify; text-justify: inter-word; }
-ul, ol { margin: 4px 0 4px 20px; }
-li { margin: 2px 0; }
+/* ENHANCED TYPOGRAPHY (INCREASED FONT SIZES) */
+h1 { font-size: 22pt; font-weight: 700; color: #0f172a; margin-bottom: 8px; line-height: 1.25; }
+h2 { font-size: 14pt; font-weight: 700; color: #1e3a8a; border-bottom: 2px solid #3b82f6; padding-bottom: 4px; margin: 10px 0 6px; line-height: 1.3; }
+h3 { font-size: 12pt; font-weight: 600; color: #1e40af; margin: 9px 0 5px; line-height: 1.35; }
+h4 { font-size: 10.8pt; font-weight: 600; color: #2563eb; margin: 7px 0 3px; }
+p  { margin: 5px 0; text-align: justify; text-justify: inter-word; }
+ul, ol { margin: 5px 0 6px 22px; }
+li { margin: 3px 0; }
 strong { color: #0f172a; font-weight: 600; }
 
-/* REFINED PAGE HEADER (NO FOOTER ON ANY PAGE) */
+/* REFINED PAGE HEADER */
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -130,7 +130,7 @@ strong { color: #0f172a; font-weight: 600; }
     border-bottom: 1.5px solid #e2e8f0;
     padding-bottom: 5px;
     margin-bottom: 10px;
-    font-size: 8pt;
+    font-size: 8.5pt;
     color: #64748b;
     font-weight: 500;
 }
@@ -148,70 +148,70 @@ strong { color: #0f172a; font-weight: 600; }
     background: linear-gradient(145deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
     color: white;
     border-radius: 6px;
-    padding: 30px 24px;
+    padding: 36px 28px;
     margin: -16mm -22mm -16mm -22mm;
 }
-.cover-logo { font-size: 46px; margin-bottom: 10px; }
-.cover-title { font-size: 26pt; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 6px; line-height: 1.2; }
-.cover-sub { font-size: 12pt; color: #93c5fd; font-weight: 500; margin-bottom: 20px; }
-.cover-card { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px 30px; margin-top: 14px; width: 85%; }
-.cover-card p { text-align: center; margin: 3px 0; color: #e2e8f0; font-size: 9.5pt; }
-.cover-card .label { color: #93c5fd; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-top: 6px; }
+.cover-logo { font-size: 52px; margin-bottom: 12px; }
+.cover-title { font-size: 28pt; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
+.cover-sub { font-size: 13pt; color: #93c5fd; font-weight: 500; margin-bottom: 24px; }
+.cover-card { background: rgba(255, 255, 255, 0.09); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 12px; padding: 20px 36px; margin-top: 18px; width: 88%; }
+.cover-card p { text-align: center; margin: 4px 0; color: #e2e8f0; font-size: 10.5pt; }
+.cover-card .label { color: #93c5fd; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-top: 8px; }
 
 /* CERTIFICATE */
 .cert-box {
-    border: 3px double #1e3a8a;
+    border: 3.5px double #1e3a8a;
     border-radius: 8px;
-    padding: 24px 30px;
+    padding: 28px 34px;
     margin: auto 0;
     text-align: center;
     background: #fafbfc;
 }
-.cert-box h2 { border: none; font-size: 16pt; color: #1e3a8a; margin-bottom: 12px; }
-.seal { font-size: 48px; margin: 8px 0; }
-.sig-row { display: flex; justify-content: space-between; margin-top: 40px; }
-.sig-box { text-align: center; border-top: 1px solid #475569; padding-top: 5px; min-width: 140px; font-size: 8.5pt; }
+.cert-box h2 { border: none; font-size: 17pt; color: #1e3a8a; margin-bottom: 14px; }
+.seal { font-size: 52px; margin: 10px 0; }
+.sig-row { display: flex; justify-content: space-between; margin-top: 48px; }
+.sig-box { text-align: center; border-top: 1.5px solid #475569; padding-top: 6px; min-width: 145px; font-size: 9.5pt; }
 
-/* TABLE OF CONTENTS - ELEGANT DOT LEADERS */
-.toc-section { margin-bottom: 10px; }
-.toc-section-title { font-size: 9.5pt; font-weight: 700; color: #1e3a8a; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px; margin-top: 8px; margin-bottom: 4px; }
+/* TABLE OF CONTENTS */
+.toc-section { margin-bottom: 12px; }
+.toc-section-title { font-size: 10.5pt; font-weight: 700; color: #1e3a8a; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 3px; margin-top: 10px; margin-bottom: 6px; }
 .toc-item {
     display: flex;
     align-items: baseline;
-    font-size: 8.8pt;
-    margin: 2.5px 0;
+    font-size: 9.8pt;
+    margin: 3.5px 0;
 }
-.toc-item.sub { padding-left: 14px; font-size: 8.2pt; color: #475569; }
+.toc-item.sub { padding-left: 16px; font-size: 9.2pt; color: #475569; }
 .toc-title { flex-shrink: 0; font-weight: 500; }
 .toc-item.bold .toc-title { font-weight: 600; color: #0f172a; }
 .toc-dots {
     flex-grow: 1;
-    border-bottom: 1.5px dotted #94a3b8;
+    border-bottom: 1.8px dotted #94a3b8;
     margin: 0 6px;
     position: relative;
-    top: -2px;
+    top: -3px;
 }
-.toc-page { flex-shrink: 0; font-weight: 600; color: #1e3a8a; min-width: 22px; text-align: right; }
+.toc-page { flex-shrink: 0; font-weight: 600; color: #1e3a8a; min-width: 24px; text-align: right; }
 
 /* TABLES */
-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 8.5pt; }
-th { background: #1e3a8a; color: white; padding: 5px 8px; text-align: left; font-weight: 600; }
-td { padding: 4.5px 8px; border: 1px solid #cbd5e1; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9.2pt; }
+th { background: #1e3a8a; color: white; padding: 6px 9px; text-align: left; font-weight: 600; }
+td { padding: 5.5px 9px; border: 1px solid #cbd5e1; }
 tr:nth-child(even) td { background: #f8fafc; }
 
 /* CODE SNIPPETS */
 pre, code {
     font-family: 'Source Code Pro', Consolas, monospace;
-    font-size: 7.8pt;
+    font-size: 8.5pt;
     background: #0f172a;
     color: #e2e8f0;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 pre {
-    padding: 8px 12px;
+    padding: 10px 14px;
     overflow: hidden;
-    line-height: 1.45;
-    margin: 6px 0;
+    line-height: 1.48;
+    margin: 8px 0;
     white-space: pre-wrap;
     word-break: break-all;
     border: 1px solid #1e293b;
@@ -219,34 +219,34 @@ pre {
 code { padding: 1px 4px; }
 
 /* CALLOUT BOXES */
-.info-box { background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 0 6px 6px 0; padding: 7px 12px; margin: 6px 0; font-size: 8.8pt; }
-.warn-box { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 6px 6px 0; padding: 7px 12px; margin: 6px 0; font-size: 8.8pt; }
-.success-box { background: #f0fdf4; border-left: 4px solid #10b981; border-radius: 0 6px 6px 0; padding: 7px 12px; margin: 6px 0; font-size: 8.8pt; }
+.info-box { background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 0 6px 6px 0; padding: 8px 14px; margin: 8px 0; font-size: 9.8pt; }
+.warn-box { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 6px 6px 0; padding: 8px 14px; margin: 8px 0; font-size: 9.8pt; }
+.success-box { background: #f0fdf4; border-left: 4px solid #10b981; border-radius: 0 6px 6px 0; padding: 8px 14px; margin: 8px 0; font-size: 9.8pt; }
 
 /* METRICS GRID */
-.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0; }
-.metric-card { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; border-radius: 8px; padding: 10px; text-align: center; }
-.metric-val { font-size: 18pt; font-weight: 700; line-height: 1.1; }
-.metric-lbl { font-size: 7.5pt; color: #bfdbfe; margin-top: 2px; }
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0; }
+.metric-card { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; border-radius: 8px; padding: 12px; text-align: center; }
+.metric-val { font-size: 20pt; font-weight: 700; line-height: 1.1; }
+.metric-lbl { font-size: 8.5pt; color: #bfdbfe; margin-top: 4px; }
 
 /* SYSTEM ARCH FLOW */
-.arch-flow { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
-.arch-box { background: #1e3a8a; color: white; padding: 6px 12px; border-radius: 6px; font-size: 8.5pt; font-weight: 500; }
-.arch-arr { color: #3b82f6; font-size: 13pt; font-weight: 700; }
+.arch-flow { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.arch-box { background: #1e3a8a; color: white; padding: 7px 14px; border-radius: 6px; font-size: 9.2pt; font-weight: 500; }
+.arch-arr { color: #3b82f6; font-size: 14pt; font-weight: 700; }
 
 /* CHAPTER BANNER */
 .ch-banner {
     background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
     color: white;
     border-radius: 6px;
-    padding: 8px 16px;
-    margin-bottom: 8px;
+    padding: 10px 18px;
+    margin-bottom: 10px;
 }
-.ch-banner .ch-num { font-size: 7.5pt; color: #93c5fd; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
-.ch-banner .ch-title { font-size: 13.5pt; font-weight: 700; }
+.ch-banner .ch-num { font-size: 8.5pt; color: #93c5fd; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+.ch-banner .ch-title { font-size: 15pt; font-weight: 700; }
 
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.ref-entry { margin: 4px 0; padding-left: 18px; text-indent: -18px; font-size: 8.2pt; line-height: 1.45; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ref-entry { margin: 5px 0; padding-left: 20px; text-indent: -20px; font-size: 9pt; line-height: 1.5; }
 """
 
 def page(content, chapter="PRESENS AI — Project Report"):
@@ -266,30 +266,30 @@ pages_html = []
 pages_html.append(f'''<div class="page">
 <div class="cover-container">
   <div class="cover-logo">🎓</div>
-  <p style="color:#93c5fd;font-size:9pt;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;">
+  <p style="color:#93c5fd;font-size:10pt;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:600;">
     Department of Computer Science &amp; Engineering
   </p>
-  <p style="color:#bfdbfe;font-size:8.5pt;margin-bottom:16px;">
+  <p style="color:#bfdbfe;font-size:9.5pt;margin-bottom:18px;">
     B.E. Final Year Project Report — Academic Year 2025–26
   </p>
   <div class="cover-title">PRESENS AI</div>
   <p class="cover-sub">Making Attendance Faster Using Artificial Intelligence</p>
-  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0;">
-    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:5px 14px;font-size:8pt;color:#ffffff;font-weight:500;">Face Recognition</div>
-    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:5px 14px;font-size:8pt;color:#ffffff;font-weight:500;">SVM Classifier</div>
-    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:5px 14px;font-size:8pt;color:#ffffff;font-weight:500;">Real-Time AI</div>
-    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:5px 14px;font-size:8pt;color:#ffffff;font-weight:500;">Streamlit Core</div>
+  <div style="display:flex;gap:12px;justify-content:center;margin:16px 0;">
+    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:6px 16px;font-size:9pt;color:#ffffff;font-weight:500;">Face Recognition</div>
+    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:6px 16px;font-size:9pt;color:#ffffff;font-weight:500;">SVM Classifier</div>
+    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:6px 16px;font-size:9pt;color:#ffffff;font-weight:500;">Real-Time AI</div>
+    <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:6px 16px;font-size:9pt;color:#ffffff;font-weight:500;">Streamlit Core</div>
   </div>
   <div class="cover-card">
     <p class="label">Submitted By</p>
-    <p style="font-size:13pt;font-weight:700;color:white;margin:2px 0;">Likhith Gowda M A</p>
-    <p style="color:#bfdbfe;font-size:8.5pt;margin-bottom:10px;">USN: 1AB22CS086</p>
+    <p style="font-size:14pt;font-weight:700;color:white;margin:3px 0;">Likhith Gowda M A</p>
+    <p style="color:#bfdbfe;font-size:9.5pt;margin-bottom:12px;">USN: 1AB22CS086</p>
     <p class="label">Project Guide</p>
-    <p style="font-size:10pt;font-weight:600;color:white;margin:2px 0;">Prof. [Guide Name]</p>
-    <p style="color:#bfdbfe;font-size:8.5pt;margin-bottom:10px;">Assistant Professor, Dept. of CSE</p>
+    <p style="font-size:11pt;font-weight:600;color:white;margin:3px 0;">Prof. [Guide Name]</p>
+    <p style="color:#bfdbfe;font-size:9.5pt;margin-bottom:12px;">Assistant Professor, Dept. of CSE</p>
     <p class="label">Institution</p>
-    <p style="font-size:10pt;font-weight:600;color:white;margin:2px 0;">Acharya Institute of Technology</p>
-    <p style="color:#bfdbfe;font-size:8.5pt;">Bengaluru, Karnataka — 560107</p>
+    <p style="font-size:11pt;font-weight:600;color:white;margin:3px 0;">Acharya Institute of Technology</p>
+    <p style="color:#bfdbfe;font-size:9.5pt;">Bengaluru, Karnataka — 560107</p>
   </div>
 </div>
 </div>''')
@@ -298,16 +298,16 @@ pages_html.append(f'''<div class="page">
 # PAGE 2 — CERTIFICATE
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page('''
-<div style="text-align:center;margin-bottom:16px;">
-  <p style="font-size:11pt;font-weight:700;color:#1e293b;letter-spacing:0.5px;">ACHARYA INSTITUTE OF TECHNOLOGY</p>
-  <p style="font-size:8.5pt;color:#64748b;">Affiliated to Visvesvaraya Technological University (VTU), Belagavi</p>
-  <p style="font-size:8.5pt;color:#64748b;">Accredited by NAAC with 'A' Grade | ISO 9001:2015 Certified</p>
-  <p style="font-size:9pt;font-weight:600;color:#1e3a8a;margin-top:2px;">Department of Computer Science &amp; Engineering</p>
+<div style="text-align:center;margin-bottom:18px;">
+  <p style="font-size:12pt;font-weight:700;color:#1e293b;letter-spacing:0.5px;">ACHARYA INSTITUTE OF TECHNOLOGY</p>
+  <p style="font-size:9.5pt;color:#64748b;">Affiliated to Visvesvaraya Technological University (VTU), Belagavi</p>
+  <p style="font-size:9.5pt;color:#64748b;">Accredited by NAAC with 'A' Grade | ISO 9001:2015 Certified</p>
+  <p style="font-size:10pt;font-weight:600;color:#1e3a8a;margin-top:3px;">Department of Computer Science &amp; Engineering</p>
 </div>
 <div class="cert-box">
   <div class="seal">🎖️</div>
   <h2>CERTIFICATE OF PROJECT COMPLETION</h2>
-  <p style="margin:14px auto;max-width:500px;line-height:1.75;font-size:9.5pt;text-align:justify;">
+  <p style="margin:16px auto;max-width:520px;line-height:1.85;font-size:10.5pt;text-align:justify;">
     This is to certify that the project entitled <strong>"PRESENS AI — Making Attendance Faster Using Artificial Intelligence"</strong>
     has been successfully completed by <strong>Likhith Gowda M A</strong> (USN: 1AB22CS086) of the
     8th Semester, Bachelor of Engineering in Computer Science &amp; Engineering, in partial fulfilment of the requirements
@@ -332,7 +332,7 @@ pages_html.append(page('''
       <p style="color:#64748b;">AIT, Bengaluru</p>
     </div>
   </div>
-  <p style="margin-top:28px;font-size:8pt;color:#64748b;">Place: Bengaluru &nbsp;|&nbsp; Date: November 2026</p>
+  <p style="margin-top:32px;font-size:9pt;color:#64748b;">Place: Bengaluru &nbsp;|&nbsp; Date: November 2026</p>
 </div>
 ''', "Certificate"))
 
@@ -344,13 +344,13 @@ pages_html.append(page('''
 <p>I, <strong>Likhith Gowda M A</strong> (USN: 1AB22CS086), student of the 8th Semester, Department of Computer Science &amp; Engineering, Acharya Institute of Technology, Bengaluru, hereby declare that the project entitled
 <strong>"PRESENS AI — Making Attendance Faster Using Artificial Intelligence"</strong>
 is an authentic record of original engineering work carried out by me under the supervision of faculty members of the Department of CSE.
-This work has not been submitted previously in part or full for the award of any other degree or diploma to any university or institution. All external citations, algorithms, datasets, and open-source libraries utilised in this work have been properly referenced.</p>
-<p style="margin-top:20px;"><strong>Likhith Gowda M A</strong><br/>
+This work has not been submitted previously in part or full for the award of any other degree or diploma to any university or institution. All external citations, algorithms, datasets, and open-source libraries utilised in this work have been properly referenced and acknowledged.</p>
+<p style="margin-top:16px;"><strong>Likhith Gowda M A</strong><br/>
 USN: 1AB22CS086 &nbsp;|&nbsp; 8th Semester, B.E. CSE<br/>
 Acharya Institute of Technology, Bengaluru<br/>
 Date: November 2026</p>
 
-<hr style="border:none;border-top:1.5px solid #e2e8f0;margin:18px 0;"/>
+<hr style="border:none;border-top:1.5px solid #e2e8f0;margin:16px 0;"/>
 
 <h2>Acknowledgements</h2>
 <p>I express my profound gratitude to <strong>Prof. [Guide Name]</strong>, Assistant Professor, Department of Computer Science &amp; Engineering, for continuous technical guidance, constructive critiques, and invaluable insights that shaped this project from inception to deployment.</p>
@@ -358,7 +358,7 @@ Date: November 2026</p>
 <p>My sincere thanks go to <strong>Dr. [Principal Name]</strong>, Principal, Acharya Institute of Technology, for fostering an academic environment focused on cutting-edge applied artificial intelligence and student-driven innovations.</p>
 <p>I also extend my heartfelt thanks to the faculty members, technical staff, classmates, and pilot testers whose willing participation in attendance scanning tests contributed vital real-world data to calibrate our recognition thresholds.</p>
 <p>Lastly, I owe deep gratitude to my family for their unwavering moral encouragement and support throughout my engineering journey.</p>
-<p style="margin-top:14px;font-style:italic;color:#475569;font-weight:500;">— Likhith Gowda M A</p>
+<p style="margin-top:12px;font-style:italic;color:#475569;font-weight:500;">— Likhith Gowda M A</p>
 ''', "Declaration & Acknowledgements"))
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -366,7 +366,7 @@ Date: November 2026</p>
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page('''
 <h2>Abstract</h2>
-<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 18px;margin-bottom:12px;">
+<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:16px 20px;margin-bottom:14px;">
 <p><strong>PRESENS AI</strong> is an enterprise-grade, automated attendance management platform designed to replace conventional paper-based and manual roll-call processes with a contactless, artificial intelligence-powered recognition workflow. Built specifically for educational institutions, PRESENS AI drastically curtails instructional time wasted on administrative attendance recording while eliminating fraudulent proxy attendance.</p>
 
 <p>The system is developed in <strong>Python</strong> using the <strong>Streamlit</strong> application framework and incorporates a client-agnostic WebRTC camera management subsystem. At the machine learning core, deep <strong>128-dimensional face representations</strong> are extracted via a ResNet-34 deep metric network trained on massive facial benchmarks. Facial embeddings are classified using subject-specific <strong>Linear Support Vector Classifiers (LinearSVC)</strong>, which partition high-dimensional space with optimal decision hyperplanes.</p>
@@ -377,7 +377,7 @@ pages_html.append(page('''
 </div>
 <p><strong>Keywords:</strong> Face Recognition, Attendance Management, Artificial Intelligence, Support Vector Machine (SVM), Streamlit, Computer Vision, dlib, Biometrics, Deep Learning, SQLite.</p>
 
-<div class="metrics-grid" style="margin-top:14px;">
+<div class="metrics-grid" style="margin-top:16px;">
   <div class="metric-card"><div class="metric-val">94.2%</div><div class="metric-lbl">Recognition Accuracy</div></div>
   <div class="metric-card"><div class="metric-val">1.2s</div><div class="metric-lbl">Per-face Latency</div></div>
   <div class="metric-card"><div class="metric-val">25/min</div><div class="metric-lbl">Processing Throughput</div></div>
@@ -386,7 +386,7 @@ pages_html.append(page('''
 ''', "Abstract"))
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PAGE 5 — TABLE OF CONTENTS (PROPER DOT LEADERS & CLEAN LAYOUT)
+# PAGE 5 — TABLE OF CONTENTS (PROPER DOT LEADERS & PROPORTIONATE FILL)
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page('''
 <h2>Table of Contents</h2>
@@ -396,13 +396,13 @@ pages_html.append(page('''
   <div class="toc-item bold"><span class="toc-title">Certificate of Project Completion</span><span class="toc-dots"></span><span class="toc-page">2</span></div>
   <div class="toc-item bold"><span class="toc-title">Candidate Declaration &amp; Acknowledgements</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
   <div class="toc-item bold"><span class="toc-title">Abstract &amp; System Performance Summary</span><span class="toc-dots"></span><span class="toc-page">4</span></div>
-  <div class="toc-item bold"><span class="toc-title">Table of Contents &amp; List of Figures</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+  <div class="toc-item bold"><span class="toc-title">Table of Contents &amp; Document Index</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
 </div>
 
 <div class="toc-section">
   <div class="toc-section-title">Academic Project Chapters</div>
   <div class="toc-item bold"><span class="toc-title">Chapter 1 — Introduction &amp; Project Overview</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
-  <div class="toc-item sub"><span class="toc-title">1.1 Background, Motivation &amp; Problem Statement</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
+  <div class="toc-item sub"><span class="toc-title">1.1 Background &amp; Problem Statement</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
   <div class="toc-item sub"><span class="toc-title">1.2 Objectives, Scope &amp; Tech Stack Architecture</span><span class="toc-dots"></span><span class="toc-page">8</span></div>
 
   <div class="toc-item bold"><span class="toc-title">Chapter 2 — Literature Survey &amp; Prior Work</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
@@ -469,8 +469,8 @@ pages_html.append(page('''
 <h2>1.2 Problem Statement</h2>
 <p>Current institutional attendance methodologies exhibit several systemic flaws that impede educational administration:</p>
 <ul>
-  <li><strong>Substantial Instructional Time Loss:</strong> Verbal roll-calls deplete 15% to 20% of class time, directly degrading instructional quality.</li>
-  <li><strong>Vulnerability to Proxy Marking:</strong> Physical signature sheets and attendance registers are susceptible to proxy marking, distorting compliance metrics.</li>
+  <li><strong>Substantial Instructional Time Loss:</strong> Verbal roll-calls deplete 15% to 20% of class time, directly degrading instructional quality and syllabus completion rates.</li>
+  <li><strong>Vulnerability to Proxy Marking:</strong> Physical signature sheets and attendance registers are susceptible to proxy marking, distorting official compliance metrics.</li>
   <li><strong>Administrative Overhead in Record Compilation:</strong> Manual tallying of paper logs into institutional ERPs requires hours of manual data entry, introducing human errors.</li>
   <li><strong>Prohibitive Hardware Investment:</strong> Dedicated biometric scanners (fingerprint, iris, facial kiosks) cost between $80 and $400 per room, creating high financial barriers for institutions.</li>
   <li><strong>Absence of Real-Time Analytics:</strong> Traditional manual methods prevent real-time notifications to students and parents regarding attendance deficits before exam eligibility cutoffs.</li>
@@ -661,17 +661,17 @@ pages_html.append(page('''
 <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin:10px 0;">
   <div style="background:#1e3a8a;color:white;border-radius:6px;padding:8px;text-align:center;margin-bottom:6px;">
     <strong>🖥️ Presentation Tier (UI &amp; Components)</strong><br/>
-    <span style="font-size:7.5pt;color:#bfdbfe;">Streamlit Engine | home_screen.py | student_screen.py | teacher_screen.py | WebRTC camera_selector</span>
+    <span style="font-size:8.5pt;color:#bfdbfe;">Streamlit Engine | home_screen.py | student_screen.py | teacher_screen.py | WebRTC camera_selector</span>
   </div>
-  <div style="text-align:center;color:#3b82f6;font-size:11pt;line-height:1;">↕</div>
+  <div style="text-align:center;color:#3b82f6;font-size:12pt;line-height:1;">↕</div>
   <div style="background:#1d4ed8;color:white;border-radius:6px;padding:8px;text-align:center;margin:6px 0;">
     <strong>⚙️ Business Logic Tier (AI &amp; Data Services)</strong><br/>
-    <span style="font-size:7.5pt;color:#bfdbfe;">ai_service.py (128-D Embeddings, LinearSVC Training &amp; Predict) | db_service.py | qr_utils.py</span>
+    <span style="font-size:8.5pt;color:#bfdbfe;">ai_service.py (128-D Embeddings, LinearSVC Training &amp; Predict) | db_service.py | qr_utils.py</span>
   </div>
-  <div style="text-align:center;color:#3b82f6;font-size:11pt;line-height:1;">↕</div>
+  <div style="text-align:center;color:#3b82f6;font-size:12pt;line-height:1;">↕</div>
   <div style="background:#1e3a8a;color:white;border-radius:6px;padding:8px;text-align:center;margin-top:6px;">
     <strong>🗄️ Persistence Tier (Database Storage)</strong><br/>
-    <span style="font-size:7.5pt;color:#bfdbfe;">SQLite Engine (presens.db) | Relational 3NF Tables | Optional Cloud Supabase PostgreSQL</span>
+    <span style="font-size:8.5pt;color:#bfdbfe;">SQLite Engine (presens.db) | Relational 3NF Tables | Optional Cloud Supabase PostgreSQL</span>
   </div>
 </div>
 
@@ -730,27 +730,27 @@ pages_html.append(page('''
 
 <h3>5.1 Deep Metric Facial Embeddings</h3>
 <p>Facial feature extraction utilizes a deep convolutional neural network based on ResNet-34. The network maps an aligned RGB face image patch <code>x</code> into a compact 128-dimensional vector space <code>f(x) ∈ ℝ¹²⁸</code>, constrained to unit length:</p>
-<div style="background:#f1f5f9;border-radius:6px;padding:8px 12px;margin:6px 0;font-family:monospace;font-size:9pt;text-align:center;">
+<div style="background:#f1f5f9;border-radius:6px;padding:9px 14px;margin:8px 0;font-family:monospace;font-size:9.5pt;text-align:center;">
   ‖f(x)‖₂ = √( Σᵢ₌₁¹²⁸ (f(x)ᵢ)² ) = 1.0
 </div>
 
 <h3>5.2 Triplet Loss Optimization</h3>
 <p>The deep metric network is trained via triplet loss over triplets consisting of an anchor face <code>x_a</code>, a positive instance <code>x_p</code> (same identity), and a negative instance <code>x_n</code> (different identity):</p>
-<div style="background:#f1f5f9;border-radius:6px;padding:8px 12px;margin:6px 0;font-family:monospace;font-size:9pt;text-align:center;">
+<div style="background:#f1f5f9;border-radius:6px;padding:9px 14px;margin:8px 0;font-family:monospace;font-size:9.5pt;text-align:center;">
   L(x_a, x_p, x_n) = max( 0, ‖f(x_a) - f(x_p)‖₂² - ‖f(x_a) - f(x_n)‖₂² + α )
 </div>
 <p>where <code>α = 0.2</code> represents the minimum required separation margin between identity clusters.</p>
 
 <h3>5.3 1:1 Biometric Verification (Student FaceID Login)</h3>
 <p>For student login, verification is executed via Euclidean distance between the live capture embedding <code>e_q</code> and the enrolled template <code>e_t</code>:</p>
-<div style="background:#f1f5f9;border-radius:6px;padding:8px 12px;margin:6px 0;font-family:monospace;font-size:9pt;text-align:center;">
+<div style="background:#f1f5f9;border-radius:6px;padding:9px 14px;margin:8px 0;font-family:monospace;font-size:9.5pt;text-align:center;">
   d(e_q, e_t) = ‖e_q - e_t‖₂ = √( Σᵢ₌₁¹²⁸ (e_q,i - e_t,i)² )
 </div>
 <p>If <code>d(e_q, e_t) &lt; τ</code> (where threshold <code>τ = 0.60</code>), identity verification succeeds. Empirical evaluations indicate that false acceptance rates drop below 0.1% at this threshold.</p>
 
 <h3>5.4 1:N Classification (Linear Support Vector Classifier)</h3>
 <p>For multi-student classroom scanning, a linear Support Vector Machine is trained over enrolled student embeddings. The objective function minimizes:</p>
-<div style="background:#f1f5f9;border-radius:6px;padding:8px 12px;margin:6px 0;font-family:monospace;font-size:9pt;text-align:center;">
+<div style="background:#f1f5f9;border-radius:6px;padding:9px 14px;margin:8px 0;font-family:monospace;font-size:9.5pt;text-align:center;">
   min_{w, b, ξ} &nbsp; ½ ‖w‖² + C Σᵢ₌₁ᴺ ξᵢ &nbsp;&nbsp; subject to &nbsp;&nbsp; yᵢ (w · eᵢ + b) ≥ 1 - ξᵢ, &nbsp; ξᵢ ≥ 0
 </div>
 ''', "Chapter 5 — Mathematical Modelling"))
@@ -761,14 +761,14 @@ pages_html.append(page('''
 pages_html.append(page('''
 <h2>5.5 Softmax Confidence Scoring</h2>
 <p>To reject un-enrolled students or visitors present in classroom photographs, raw decision values <code>d_k</code> from the One-vs-Rest SVM hyperplanes are calibrated into posterior probabilities using temperature-scaled softmax:</p>
-<div style="background:#f1f5f9;border-radius:6px;padding:8px 12px;margin:6px 0;font-family:monospace;font-size:9pt;text-align:center;">
+<div style="background:#f1f5f9;border-radius:6px;padding:9px 14px;margin:8px 0;font-family:monospace;font-size:9.5pt;text-align:center;">
   P(y = k | e) = exp( d_k / T ) / ( Σⱼ₌₁ᴷ exp( d_j / T ) ) &nbsp;&nbsp;&nbsp; [Temperature T = 0.5]
 </div>
 <p>A classification decision is accepted and marked present only if <code>max_k P(y = k | e) ≥ 0.60</code>. Candidates failing this threshold are categorized as unknown.</p>
 
 <h2>5.6 Attendance Percentage Formula</h2>
 <p>Individual student compliance is calculated as the ratio of marked sessions to conducted sessions:</p>
-<div style="background:#f1f5f9;border-radius:6px;padding:8px 12px;margin:6px 0;font-family:monospace;font-size:9pt;text-align:center;">
+<div style="background:#f1f5f9;border-radius:6px;padding:9px 14px;margin:8px 0;font-family:monospace;font-size:9.5pt;text-align:center;">
   A(s, c) = ( N_{attended}(s, c) / N_{total}(c) ) × 100%
 </div>
 <p>Students exhibiting <code>A(s, c) &lt; 75%</code> are flagged with visual alerts on both teacher and student dashboards.</p>
@@ -795,7 +795,7 @@ pages_html.append(page(f'''
 </div>
 
 <h3>Figure 6.1 — PRESENS AI Home / Landing Page</h3>
-{img_tag(HOME_IMG, "Fig. 6.1: PRESENS AI Home / Landing Page — glassmorphic hero interface with animated background and portal gateways", "100mm")}
+{img_tag(HOME_IMG, "Fig. 6.1: PRESENS AI Home / Landing Page — glassmorphic hero interface with animated background and portal gateways", "116mm")}
 <p>The landing page represents the primary entry point for all users. Designed with a dark navy-to-blue gradient (#0f172a to #2563eb), it highlights the system identity and project tagline: <em>"Making Attendance Faster Using AI"</em>.</p>
 <p>Two distinct call-to-action cards allow immediate routing: the <strong>Student Portal</strong> card (for registration, FaceID login, and attendance tracking) and the <strong>Teacher Portal</strong> card (for authentication and classroom administration). The interface suppress all native Streamlit branding, delivering a polished, standalone application feel.</p>
 ''', "Chapter 6 — UI Design"))
@@ -805,7 +805,7 @@ pages_html.append(page(f'''
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page(f'''
 <h2>Figure 6.2 — Student Portal: Biometric Login &amp; Camera Selector</h2>
-{img_tag(STUDENT_IMG, "Fig. 6.2: Student Portal — FaceID login interface showing Camera Source Preference selector and photo upload mode", "100mm")}
+{img_tag(STUDENT_IMG, "Fig. 6.2: Student Portal — FaceID login interface showing Camera Source Preference selector and photo upload mode", "116mm")}
 <p>The Student Portal provides two login methods: Biometric <strong>FaceID Login</strong> and secondary <strong>Student ID Login</strong>. A prominent technical feature visible here is the <strong>Camera Source Preference</strong> selector. Students can choose between <em>"Prefer System Camera"</em> (laptop webcam) and <em>"Prefer External Camera"</em> (USB cam or mobile Wi-Fi cam via Iriun Webcam).</p>
 <p>When external camera mode is selected, the underlying WebRTC component enumerates video devices and binds directly to the high-resolution external stream. Students can also upload a clear face photograph as an alternative to live camera capture.</p>
 ''', "Chapter 6 — UI Design"))
@@ -815,7 +815,7 @@ pages_html.append(page(f'''
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page(f'''
 <h2>Figure 6.3 — Teacher Portal: Authentication Screen</h2>
-{img_tag(TEACHER_LOGIN_IMG, "Fig. 6.3: Teacher Portal — Secure authentication screen featuring password masking and salted hash verification", "100mm")}
+{img_tag(TEACHER_LOGIN_IMG, "Fig. 6.3: Teacher Portal — Secure authentication screen featuring password masking and salted hash verification", "116mm")}
 <p>The Teacher Portal authentication interface enforces strict credential verification. To prevent brute-force attacks and credential theft, passwords are submitted over secure HTTP and validated against stored SHA-256 salted hashes. The clean card layout centers the username and masked password input fields with an intuitive password-toggle feature.</p>
 <p>Successful authentication establishes a server-side session that unlocks course management, classroom scanning, and institutional auditing tools. Unsuccessful attempts display clear error feedback without revealing specific account existence.</p>
 ''', "Chapter 6 — UI Design"))
@@ -825,7 +825,7 @@ pages_html.append(page(f'''
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page(f'''
 <h2>Figure 6.4 — Teacher Dashboard: Classroom Photo Scanner</h2>
-{img_tag(TEACHER_DASH_IMG, "Fig. 6.4: Teacher Dashboard — Classroom photo upload interface with batch scanning and immediate recognition badges", "100mm")}
+{img_tag(TEACHER_DASH_IMG, "Fig. 6.4: Teacher Dashboard — Classroom photo upload interface with batch scanning and immediate recognition badges", "116mm")}
 <p>The classroom attendance scanning tab enables instructors to select a course from their assigned subjects and capture or upload classroom photographs. The teacher can select camera source preferences or drag-and-drop multiple high-resolution photos taken across different classroom sections.</p>
 <p>Upon triggering the <em>"🤖 Scan for Attendance"</em> action, the backend executes batch face detection, extracts 128-D embeddings, and evaluates each face against the subject's trained Linear Support Vector Classifier. Students identified with confidence &gt;60% are immediately marked present with verified green badges.</p>
 ''', "Chapter 6 — UI Design"))
@@ -835,7 +835,7 @@ pages_html.append(page(f'''
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page(f'''
 <h2>Figure 6.5 — Teacher Dashboard: Manage Subjects &amp; Join Codes</h2>
-{img_tag(TEACHER_SUBJ_IMG, "Fig. 6.5: Teacher Dashboard — Manage Subjects tab showing course cards, enrollment counts, and shareable join codes", "100mm")}
+{img_tag(TEACHER_SUBJ_IMG, "Fig. 6.5: Teacher Dashboard — Manage Subjects tab showing course cards, enrollment counts, and shareable join codes", "116mm")}
 <p>The <strong>Manage Subjects</strong> tab displays an interactive course catalog for the logged-in instructor. Each subject is rendered as a stylized card displaying course title, section code, enrolled student count, and total attendance sessions completed to date.</p>
 <p>Instructors can create new subjects with auto-generated 6-character alphanumeric join codes (e.g. <code>CS101</code>). An integrated QR utility dynamically renders a scannable QR code on screen. Projecting this QR code in the classroom allows students to scan and enroll into the subject in under 10 seconds.</p>
 ''', "Chapter 6 — UI Design"))
@@ -845,7 +845,7 @@ pages_html.append(page(f'''
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page(f'''
 <h2>Figure 6.6 — Teacher Dashboard: Attendance Records &amp; CSV Export</h2>
-{img_tag(TEACHER_REC_IMG, "Fig. 6.6: Teacher Dashboard — Tabular attendance records view with filtering controls and CSV download capability", "100mm")}
+{img_tag(TEACHER_REC_IMG, "Fig. 6.6: Teacher Dashboard — Tabular attendance records view with filtering controls and CSV download capability", "116mm")}
 <p>The <strong>Attendance Records</strong> interface provides complete transparency into institutional presence data. A dynamic, sortable data table presents timestamped records detailing student names, IDs, subject codes, sections, and marked times.</p>
 <p>Instructors can filter records by date ranges, individual subjects, or specific students. A prominent <em>"📥 Export Attendance Records (CSV)"</em> button enables instant download of formatted attendance spreadsheets for seamless integration into university ERP databases and semester compliance reporting.</p>
 ''', "Chapter 6 — UI Design"))
@@ -1070,11 +1070,11 @@ st.set_page_config(
 # Global CSS to eliminate Streamlit branding
 st.markdown("""
 <style>
-    #MainMenu {visibility: hidden !important; display: none !important;}
-    header {visibility: hidden !important; display: none !important;}
-    footer {visibility: hidden !important; display: none !important;}
-    [data-testid="stToolbar"] {visibility: hidden !important; display: none !important;}
-    [data-testid="stDeployButton"] {visibility: hidden !important; display: none !important;}
+    #MainMenu {visibility: hidden !important;}
+    header {visibility: hidden !important;}
+    footer {visibility: hidden !important;}
+    [data-testid="stToolbar"] {visibility: hidden !important;}
+    [data-testid="stDeployButton"] {visibility: hidden !important;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -1163,11 +1163,11 @@ def verify_face(query_embedding, stored_embedding, threshold=0.60):
 ''', "Chapter 10 — Source Code"))
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PAGE 32 — CHAPTER 10: SOURCE CODE — ai_service.py (Part 2)
+# PAGE 32 — CHAPTER 10: SOURCE CODE — ai_service.py (Part 2 - FULLY FILLED)
 # ═══════════════════════════════════════════════════════════════════════════════
 pages_html.append(page('''
 <h2>10.2 (Continued) — SVM Classifier &amp; Classroom Batch Scanner</h2>
-<p>Trains per-subject Support Vector Classifiers and executes batch detection on classroom photos.</p>
+<p>Trains per-subject Support Vector Classifiers and executes batch detection on classroom photos with posterior calibration.</p>
 <pre>def train_subject_classifier(student_embeddings, student_ids):
     """Train a Linear Support Vector Classifier for enrolled students."""
     if not SKLEARN_AVAILABLE or len(student_embeddings) < 2:
@@ -1217,7 +1217,15 @@ def scan_classroom_photo(image_input, classifier, enrolled_student_ids):
                 "confidence": confidence,
                 "face_location": location
             })
-    return results</pre>
+    return results
+
+def compute_recognition_metrics(detected_results, ground_truth_ids):
+    """Calculate batch precision, recall and match counts for auditing."""
+    identified_ids = {r["student_id"] for r in detected_results}
+    true_positives = len(identified_ids.intersection(ground_truth_ids))
+    precision = true_positives / len(identified_ids) if identified_ids else 0.0
+    recall = true_positives / len(ground_truth_ids) if ground_truth_ids else 0.0
+    return {"tp": true_positives, "precision": precision, "recall": recall}</pre>
 ''', "Chapter 10 — Source Code"))
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1580,15 +1588,15 @@ pages_html.append(page('''
 
 <hr style="border:none;border-top:1.5px solid #cbd5e1;margin:20px 0 14px;"/>
 
-<div style="background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;border-radius:8px;padding:18px 24px;text-align:center;">
-  <div style="font-size:30px;margin-bottom:6px;">🎓</div>
-  <div style="font-size:14pt;font-weight:700;color:white;margin-bottom:4px;">PRESENS AI</div>
-  <p style="color:#93c5fd;font-size:9.5pt;margin-bottom:10px;">Making Attendance Faster Using Artificial Intelligence</p>
-  <p style="color:#e2e8f0;font-size:8.5pt;line-height:1.7;">
+<div style="background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;border-radius:8px;padding:20px 26px;text-align:center;">
+  <div style="font-size:32px;margin-bottom:6px;">🎓</div>
+  <div style="font-size:15pt;font-weight:700;color:white;margin-bottom:4px;">PRESENS AI</div>
+  <p style="color:#93c5fd;font-size:10pt;margin-bottom:12px;">Making Attendance Faster Using Artificial Intelligence</p>
+  <p style="color:#e2e8f0;font-size:9pt;line-height:1.75;">
     Bachelor of Engineering in Computer Science &amp; Engineering<br/>
     Visvesvaraya Technological University, Belagavi — Academic Year 2025–26
   </p>
-  <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.15);font-size:8.5pt;color:#bfdbfe;">
+  <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.18);font-size:9pt;color:#bfdbfe;">
     <p style="margin:2px 0;"><strong style="color:white;">Author:</strong> Likhith Gowda M A &nbsp;|&nbsp; USN: 1AB22CS086</p>
     <p style="margin:2px 0;">Acharya Institute of Technology, Bengaluru — 560107</p>
     <p style="margin:2px 0;">GitHub: <code>github.com/Likhithgowda24/PRESENS-AI</code></p>
